@@ -1,14 +1,15 @@
 <script setup>
 import { ref } from 'vue';
 
-const emit = defineEmits(['login-succeess']);
+//emit은 부모 컴포넌트에게 이벤트를 전달하는 역할을 한다.
+const emit = defineEmits(['login-success']);
 
 const username = ref('');
 const password = ref('');
 
 function tryLogin() {
     if (username.value === 'admin' && password.value === '1234') {
-        emit('login-succeess', username.value)
+        emit('login-success', username.value)
     } else {
         alert('틀림')
     }
