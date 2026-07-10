@@ -1,21 +1,31 @@
 <template>
     <div class="container">
-        <LoginBox v-if="!isLoggedIn" @login-success="onLoginSuccess" />
-        <WelcomeBox v-else :user="loginUser" @logout="isLoggedIn = false" />
+        <LoginBox v-if="!getIsLoggedIn" @login-success="onLoginSuccess" />
   </div>
 </template>
 
 <script setup>
-    import { ref } from 'vue';
-
+    import { useStatusStore } from '@/store/status.js';
+    import { storeToRefs } from 'pinia';
     import LoginBox from '@/components/LoginBox.vue';
-    import WelcomeBox from '@/components/WelcomeBox.vue';
-
-    const loginUser = ref('');
-    const isLoggedIn = ref(false);
+    import { useRouter } from 'vue-router';
+    
+    const router = useRouter();
+    const userStatus = useStatusStore();
+    const { getIsLoggedIn } = storeToRefs(userStatus);
 
     function onLoginSuccess(name) {
-    isLoggedIn.value = true;
-    loginUser.value = name;
+        console.log('로그인 성공:', getIsLoggedIn.value);
+        router.push('/welcome');
     }
+
 </script>
+
+<style scoped>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>

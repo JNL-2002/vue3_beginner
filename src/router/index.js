@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '@/views/LoginPage.vue'
+import WelcomePage from '@/views/WelcomePage.vue'
 
 const routers = [
     {
@@ -7,9 +8,17 @@ const routers = [
         redirect: '/login'
     },
     {
+        path: '/welcome'
+    },
+    {
         path: '/login',
         name: 'Login',
         component: LoginPage
+    },
+    {
+        path: '/welcomee',
+        name: 'Welcome',
+        component: WelcomePage
     }
 ]
 

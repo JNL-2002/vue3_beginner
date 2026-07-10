@@ -1,26 +1,37 @@
 <script setup>
 import { ref } from 'vue';
+import { useStatusStore } from '@/store/status.js';
 
-//emit은 부모 컴포넌트에게 이벤트를 전달하는 역할을 한다.
+const LoginUser = ref('');
+const LoginPassword = ref('');
+const userStatus = useStatusStore();
+const { setIsLoggedIn, setLoginUser, setLoginPassword } = userStatus;
 const emit = defineEmits(['login-success']);
 
-const username = ref('');
-const password = ref('');
 
 function tryLogin() {
-    if (username.value === 'admin' && password.value === '1234') {
-        emit('login-success', username.value)
+    if (LoginUser.value === 'admin' && LoginPassword.value === '1234') {
+        setIsLoggedIn(true);
+        setLoginUser(LoginUser.value);
+        setLoginPassword(LoginPassword.value);
+        emit('login-success', LoginUser.value);
     } else {
-        alert('틀림')
+        alert('틀림');
     }
 }
 </script>
 
 <template>
     <div>
-        <h2>로그인 하기</h2>
-        <input v-model="username" type="text" /><br><br>
-        <input v-model="password" type="password" /><br><br>
+        <h2>로그인</h2>
+        <input v-model="LoginUser" type="text" /><br><br>
+        <input v-model="LoginPassword" type="password" /><br><br>
         <button @click="tryLogin">로그인</button>
     </div>
 </template>
+
+<style scoped>
+    h2 {
+        text-align: center;
+    }
+</style>
