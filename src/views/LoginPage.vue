@@ -14,8 +14,7 @@
     const userStatus = useStatusStore();
     const { getIsLoggedIn } = storeToRefs(userStatus);
 
-    function onLoginSuccess(name) {
-        console.log('로그인 성공:', getIsLoggedIn.value);
+    function onLoginSuccess() {
         router.push('/welcome');
     }
 

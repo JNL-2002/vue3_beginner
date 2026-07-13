@@ -16,7 +16,7 @@ const routers = [
         component: LoginPage
     },
     {
-        path: '/welcomee',
+        path: '/welcome',
         name: 'Welcome',
         component: WelcomePage
     }
