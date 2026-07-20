@@ -2,26 +2,16 @@ import { defineStore } from 'pinia'
 
 export const useStatusStore = defineStore('status', {
     state: () => ({
-        isLoggedIn: false,
-        loginUser: '',
-        loginPassword: ''
+        isLoggedIn: ''
     }),
 
     getters: {
-        getIsLoggedIn: (state) => state.isLoggedIn,
-        getLoginUser: (state) => state.loginUser,
-        getLoginPassword: (state) => state.loginPassword
+        getIsLoggedIn: (state) => state.isLoggedIn
     },
 
     actions: {
         setIsLoggedIn(value) {
             this.isLoggedIn = value;
-        },
-        setLoginUser(value) {
-            this.loginUser = value;
-        },
-        setLoginPassword(value) {
-            this.loginPassword = value;
         }
     }
 });

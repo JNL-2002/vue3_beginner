@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <LoginBox v-if="!getIsLoggedIn" @login-success="onLoginSuccess" />
+        <LoginBox v-if="getIsLoggedIn == '실패' || getIsLoggedIn == ''" @login-success="onLoginSuccess" />
   </div>
 </template>
 

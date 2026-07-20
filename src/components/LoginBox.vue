@@ -1,24 +1,30 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useStatusStore } from '@/store/status.js';
+import api from '@/api/index.js';
 
 const LoginUser = ref('');
 const LoginPassword = ref('');
 const userStatus = useStatusStore();
-const { setIsLoggedIn, setLoginUser, setLoginPassword } = userStatus;
 const emit = defineEmits(['login-success']);
 
 
-function tryLogin() {
-    if (LoginUser.value === 'admin' && LoginPassword.value === '1234') {
-        setIsLoggedIn(true);
-        setLoginUser(LoginUser.value);
-        setLoginPassword(LoginPassword.value);
-        emit('login-success', LoginUser.value);
-    } else {
-        alert('틀림');
+
+async function tryLogin() {
+        const response = await api.post('/v1/login', {
+            username: LoginUser.value,
+            password: LoginPassword.value
+        });
+        
+        console.log('로그인 API 응답:', response.data);
+        userStatus.setIsLoggedIn(response.data);
+
+        if (response.data == '성공') {
+            emit('login-success');
+        } else {
+            alert('로그인 실패. 아이디와 비밀번호를 확인하세요.');
+        }
     }
-}
 </script>
 
 <template>
